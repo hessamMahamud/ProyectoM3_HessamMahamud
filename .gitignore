@@ -1,0 +1,27 @@
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+.Trash-*
+.Trashes
+.Spotlight-V100
+
+# Sync conflict
+.syncthing.*
+.sync-conflict-*
+*.sync-conflict-*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos ocultos comunes
+.fuse_hidden
+.directory
+
+#node
+node_modules
