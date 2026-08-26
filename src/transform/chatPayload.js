@@ -5,7 +5,8 @@ const MAX_TURNS_HISTORY = 12;
 
 export function toApiMessages(uiMessages) {
     return uiMessages.map((msg) => ({
-        role: msg.role === "charachter" ? "model" : "user",
+        // 🔥 CORREGIDO: "charachter" -> "character"
+        role: msg.role === "character" ? "model" : "user",
         parts: [{ text: msg.text }],
     }));
 }
@@ -13,8 +14,10 @@ export function toApiMessages(uiMessages) {
 export function buildPayload({ systemPrompt, uiMessages }) {
     return {
         model: MODEL_NAME,
-        sistemInstruction: {
-            parts: [{ text: systemPropmt }],
+        // 🔥 CORREGIDO: "sistemInstruction" -> "systemInstruction"
+        systemInstruction: {
+            // 🔥 CORREGIDO: "systemPropmt" -> "systemPrompt"
+            parts: [{ text: systemPrompt }],
         },
         contents: toApiMessages(uiMessages),
         generationConfig: {
@@ -24,8 +27,10 @@ export function buildPayload({ systemPrompt, uiMessages }) {
     };
 }
 
-export function normalizeAiResponse() {
+// 🔥 CORREGIDO: agregué el parámetro "raw" que faltaba
+export function normalizeAiResponse(raw) {
     const parts = raw?.candidates?.[0]?.content?.parts;
+    if (!parts) return "";
 
     return parts
         .filter((p) => p && typeof p.text === "string")
@@ -38,7 +43,7 @@ export function appendUserMessage(messages, text) {
     return [...messages, { role: "user", text }];
 }
 
-export function appendAssitantMessage(messages, text) {
+export function appendAssistantMessage(messages, text) { // 🔥 Corregí "Assitant" a "Assistant"
     return [...messages, { role: "character", text }];
 }
 
