@@ -12,8 +12,8 @@ export default async function handler(req, res) {
             model: "gemini-flash-lite-latest",
             systemInstruction: systemPrompt,
             generationConfig: {
-                maxOutputTokens: 200,
-                temperature: 0.9,
+                maxOutputTokens: 100,
+                temperature: 0.6,
             },
         });
 
