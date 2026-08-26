@@ -1,14 +1,14 @@
 :root {
-    /* Colores principales */
+    /*==> Colores principales <==*/
     --color-primary: #111827;
     /* fondo oscuro, texto claro */
     --color-primary-hover: #374151;
     /* hover sobre elementos oscuros */
     --color-primary-light: #1f2937;
     /* variante más clara */
-
     --color-bg-page: #f9fafb;
-    /* fondo general */
+
+    /*--> fondo general */
     --color-bg-app: #ffffff;
     /* fondo del contenedor del chat */
     --color-bg-message-other: #f3f4f6;
@@ -20,6 +20,7 @@
     --color-bg-hover: #f3f4f6;
     /* hover en algunos elementos (ej. tarjeta) */
 
+    /*--> texto */
     --color-text-primary: #111827;
     /* texto principal */
     --color-text-secondary: #6b7280;
@@ -31,6 +32,7 @@
     --color-text-muted: #4b5563;
     /* texto desenfatizado */
 
+    /*--> bordes */
     --color-border: #e5e7eb;
     /* bordes generales */
     --color-border-input: #d1d5db;
@@ -40,10 +42,10 @@
     --color-border-app: #e5e7eb;
     /* borde del contenedor en desktop */
 
-    /* Sombras */
+    /*--> Sombras */
     --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.05);
 
-    /* Tipografía */
+    /*==> Tipografía <==*/
     --font-family-base: system-ui, -apple-system, "Segoe UI", sans-serif;
     --font-size-base: 1rem;
     /* 16px */
@@ -60,7 +62,7 @@
     --font-size-detail: 0.95rem;
     /* 15.2px */
 
-    /* Espaciado (escala) */
+    /*==> Espaciado (escala) <==*/
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 0.75rem;
@@ -70,19 +72,20 @@
     --spacing-2xl: 2rem;
     --spacing-3xl: 2.5rem;
 
-    /* Radio de bordes */
+    /*==> Radio de bordes <==*/
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
     --radius-lg: 0.75rem;
     --radius-xl: 1rem;
     --radius-full: 9999px;
 
-    /* Transiciones */
+    /*==> Transiciones <==*/
     --transition-fast: 0.15s;
 
-    /* Animaciones */
+    /*==> Animaciones <==*/
     --animation-pulse-duration: 1.2s;
 
+    /*==> Width <==*/
     /* Max-width */
     --container-max-width: 64rem;
     /* 1024px */
