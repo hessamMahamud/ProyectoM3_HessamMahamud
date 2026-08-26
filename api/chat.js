@@ -1,3 +1,5 @@
 export default function handler(req, res) {
-    res.status(200).json({ message: "Hola desde el backend" });
+    if (req.method !== "POST") {
+        return res.status(405).json({ message: "" })
+    };
 }

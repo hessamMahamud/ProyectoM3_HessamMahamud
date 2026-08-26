@@ -1,4 +1,3 @@
-import { send as sendToMock } from "./mockGeminiApi.js";
 import { RICK_SYSTEM_PROMPT } from "./prompts.js";
 import { buildPayload, normalizeAiResponse, getTrimmedHistory } from "../transform/chatPayload.js";
 
