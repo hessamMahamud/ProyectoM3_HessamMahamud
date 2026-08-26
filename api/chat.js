@@ -9,7 +9,7 @@ export default async function handler(req, res) {
         const { systemPrompt, messages } = req.body;
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
         const model = genAI.getGenerativeModel({
-            model: "gemini-flash-latest",
+            model: "gemini-flash-lite-latest",
             systemInstruction: systemPrompt,
             generationConfig: {
                 maxOutputTokens: 200,
