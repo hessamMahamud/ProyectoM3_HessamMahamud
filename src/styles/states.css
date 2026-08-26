@@ -47,5 +47,5 @@
 
 .message__retry:hover {
     background: #991b1b;
-    /* si quieres, crea una variable --color-error-dark */
+    /* se pude crear una variable --color-error-dark */
 }
