@@ -7,7 +7,7 @@ export function navigateTo(path) {
 
 export function setupLinkInterception() {
     document.addEventListener("click", (event) => {
-        const link = event.target.closer("a");
+        const link = event.target.closest("a");
         if (!link) return;
 
         const href = link.getAttribute("href");

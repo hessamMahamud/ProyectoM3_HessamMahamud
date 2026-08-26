@@ -1,4 +1,4 @@
-import { RICK_SYSTEM_PROMPT } from "./prompts.js";
+import { AINZ_SYSTEM_PROMPT } from "./prompts.js";
 import {
     toApiMessages,        // <-- Importamos esto para formatear los mensajes
     getTrimmedHistory,
@@ -13,7 +13,7 @@ export async function getCharacterReply(uiMessages) {
 
     // Armamos el payload que le vamos a mandar a nuestra Serverless Function
     const payload = {
-        systemPrompt: RICK_SYSTEM_PROMPT,
+        systemPrompt: AINZ_SYSTEM_PROMPT,
         messages: apiMessages,
     };
 
