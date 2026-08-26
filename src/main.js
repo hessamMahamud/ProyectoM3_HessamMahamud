@@ -1,4 +1,4 @@
-import { setupLinkInterception } from "./utils/navigation.js";
+import { setupLinkInterception } from "./navigation.js";
 import { router } from "./router.js";
 
 setupLinkInterception();
