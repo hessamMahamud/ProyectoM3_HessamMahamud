@@ -1,8 +1,8 @@
 import { AINZ_SYSTEM_PROMPT } from "./prompts.js";
 import {
-    toApiMessages,        // <-- Importamos esto para formatear los mensajes
+    toApiMessages,
     getTrimmedHistory,
-} from "../transform/chatPayload.js";
+} from "./chatPayload.js";
 
 export async function getCharacterReply(uiMessages) {
     // Recortamos el historial para no pasarnos de los tokens (máximo 12 turnos)

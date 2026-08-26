@@ -1,6 +1,6 @@
-import { getCharacterReply } from "../services/aiClient.js";
-import { debounce, wait } from "../services/debounce.js";
-import { getUserMessage } from "../ui/messages.js";
+import { getCharacterReply } from "./aiClient.js";
+import { debounce, wait } from "../../shared/debounce.js";
+import { getUserMessage } from "./errorMessages.js";
 
 const state = {
     messages: [{ role: "character", text: "Hola, soy tu personaje favorito. Qué quieres saber?" }],

@@ -1,7 +1,7 @@
-import { renderHome } from "./views/home.js";
-import { renderChat } from "./views/chat.js";
-import { renderAbout } from "./views/about.js";
-import { renderNotFound } from "./views/notFound.js";
+import { renderHome } from "./features/home/home.view.js";
+import { renderChat } from "./features/chat/chat.view.js";
+import { renderAbout } from "./features/about/about.view.js";
+import { renderNotFound } from "./features/notFound/notFound.view.js";
 
 const routes = {
     "/": renderHome,
