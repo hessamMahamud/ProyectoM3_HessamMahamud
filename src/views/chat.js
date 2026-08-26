@@ -133,7 +133,7 @@ async function sendMessage(text, isRetry = false) {
         const reply = await getCharacterReply(nextMessages);
         setState({
             messages: [...nextMessages, { role: "character", text: reply }],
-            status: "loading",
+            status: "idle",
             error: null,
             lastUserMessage: null,
         });
@@ -169,7 +169,7 @@ async function sendMessage(text, isRetry = false) {
 
         setState({
             status: "error",
-            error: getUserMessage(err),
+            error: getUserMessage(error),
         });
     }
 }
