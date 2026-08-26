@@ -33,3 +33,15 @@ export function normalizeAiResponse() {
         .join("")
         .trim();
 }
+
+export function appendUserMessage(messages, text) {
+    return [...messages, { role: "user", text }];
+}
+
+export function appendAssitantMessage(messages, text) {
+    return [...messages, { role: "character", text }];
+}
+
+export function getTrimmedHistory(messages, maxTurns = MAX_TURNS_HISTORY) {
+    return messages.slice(-maxTurns);
+}
