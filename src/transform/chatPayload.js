@@ -9,3 +9,21 @@ export function toApiMessages(uiMessages) {
         parts: [{ text: msg.text }],
     }));
 }
+
+export function buildPayload({ systemPrompt, uiMessages }) {
+    return {
+        model: MODEL_NAME,
+        sistemInstruction: {
+            parts: [{ text: systemPropmt }],
+        },
+        contents: toApiMessages(uiMessages),
+        generationConfig: {
+            maxOutputTokens: MAX_OUTPUT_TOKENS,
+            temperature: TEMPERATURE,
+        },
+    };
+}
+
+export function normalizeAiResponse() {
+
+}
