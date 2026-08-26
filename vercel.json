@@ -1,0 +1,7 @@
+{
+    "functions": {
+        "api/chat.js": {
+            "runtime": "nodejs@24.x"
+        }
+    }
+}

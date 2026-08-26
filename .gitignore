@@ -34,3 +34,4 @@ src/docs/20260821101736.md
 .env.local
 .env*.local
 .vercel
+.env*
