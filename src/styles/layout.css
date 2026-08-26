@@ -1,0 +1,40 @@
+.chatApp {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--color-bg-app);
+}
+
+.chatHeader {
+    padding: var(--spacing-base);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-app);
+}
+
+.chatHeader__title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+.chatHeader__subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.chatMessages {
+    flex: 1;
+    overflow: auto;
+    padding: var(--spacing-base);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    overscroll-behavior-y: contain;
+}
+
+.chatComposer {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-app);
+}

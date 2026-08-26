@@ -1,0 +1,61 @@
+/* Tablet: 768px en adelante */
+@media (min-width: 768px) {
+    .chatHeader {
+        padding: var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .chatMessages {
+        padding: var(--spacing-xl);
+        gap: var(--spacing-base);
+    }
+
+    .chatComposer {
+        padding: var(--spacing-base) var(--spacing-xl);
+    }
+
+    .message {
+        max-width: 75%;
+    }
+}
+
+/* Desktop: 1024px en adelante */
+@media (min-width: 1024px) {
+    body {
+        background: var(--color-bg-message-other);
+    }
+
+    .chatApp {
+        max-width: var(--container-max-width);
+        margin: 0 auto;
+        border-left: 1px solid var(--color-border-app);
+        border-right: 1px solid var(--color-border-app);
+    }
+
+    .chatHeader {
+        padding: var(--spacing-xl) var(--spacing-2xl);
+    }
+
+    .chatMessages {
+        padding: var(--spacing-2xl);
+    }
+
+    .chatComposer {
+        padding: var(--spacing-xl) var(--spacing-2xl);
+    }
+
+    .message {
+        max-width: 60%;
+    }
+
+    /* Tarjeta horizontal (ya que está en character.css, pero la media query es específica) */
+    .characterCard {
+        flex-direction: row;
+        max-width: var(--card-max-width);
+    }
+
+    .characterCard__image {
+        width: var(--card-image-width);
+        aspect-ratio: auto;
+        flex-shrink: 0;
+    }
+}
