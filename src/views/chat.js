@@ -1,4 +1,4 @@
-import { getCharacterReplay } from "../services/aiClient.js";
+import { getCharacterReply } from "../services/aiClient.js";
 import { debounce, wait } from "../services/debounce.js";
 import { getUserMessage } from "../ui/messages.js";
 
@@ -119,4 +119,64 @@ function setupChat() {
     $input.focus();
 }
 
+async function sendMessage(text, isRetry = false) {
+    const nextMessages = isRetry ? state.messages: [...state.messages, { role: "user", text }];
 
+    setState({
+        messages: nextMessages,
+        status: "loading",
+        error: null,
+        lastUserMessage: isRetry ? state.lastUserMessage : text,
+    });
+
+    try {
+        const reply = await getCharacterReply(nextMessages);
+        setState({
+            messages: [...nextMessages, { role: "character", text: reply }],
+            status: "loading",
+            error: null,
+            lastUserMessage: null,
+        });
+
+    } catch (error) {
+        if (error.status === 429) {
+            const seconds = error.retryAfterSeconds ?? 5;
+
+            for (let s = seconds; s > 0; s--) {
+                setState({ status: "loading", retryCountdown: s });
+                await wait (1000);
+            }
+
+            try {
+                setState({ status: "loading", retryCountdown: null });
+                const reply = await getCharacterReply(nextMessages);
+                setState({
+                    messages: [...nextMessages, { role: "character", text: reply }],
+                    status: "idle",
+                    error: null,
+                    lastUserMessage: null,
+                });
+                return;
+
+            } catch (errorRetry) {
+                setState({
+                    status: "error",
+                    error: getUserMessage(errorRetry),
+                });
+                return;
+            }
+        }
+
+        setState({
+            status: "error",
+            error: getUserMessage(err),
+        });
+    }
+}
+
+function scrollToBottom() {
+    const $messages = document.querySelector("#chatMessages");
+    if ($messages) {
+        $messages.scrollTop = $messages.scrollHeight;
+    }
+}

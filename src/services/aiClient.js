@@ -1,7 +1,7 @@
 import { RICK_SYSTEM_PROMPT } from "./prompts.js";
 import { buildPayload, normalizeAiResponse, getTrimmedHistory } from "../transform/chatPayload.js";
 
-export async function getCharacterReplay(uiMessages) {
+export async function getCharacterReply(uiMessages) {
     const trimmed = getTrimmedHistory(uiMessages);
 
     const payload = buildPayload({
