@@ -17,7 +17,9 @@ export default async function handler(req, res) {
             },
         });
 
-        const history = messages.slice(0, -1);
+        const historyMessages = messages.slice(0, -1);
+        const firstUserIndex = historyMessages.findIndex((m) => m.role === "user");
+        const history = firstUserIndex === -1 ? [] : historyMessages.slice(firstUserIndex);
         const lastMessage = messages[messages.length - 1];
         const chat = model.startChat({ history });
         const result = await chat.sendMessage(lastMessage.parts[0].text);
