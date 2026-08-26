@@ -25,5 +25,11 @@ export function buildPayload({ systemPrompt, uiMessages }) {
 }
 
 export function normalizeAiResponse() {
+    const parts = raw?.candidates?.[0]?.content?.parts;
 
+    return parts
+        .filter((p) => p && typeof p.text === "string")
+        .map((p) => p.text)
+        .join("")
+        .trim();
 }
