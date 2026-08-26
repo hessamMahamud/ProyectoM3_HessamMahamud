@@ -1,4 +1,4 @@
-const MODEL_NAME = "gemini-1.5-flash-latest";
+const MODEL_NAME = "gemini-flash-latest";
 const MAX_OUTPUT_TOKENS = 200;
 const TEMPERATURE = 0.9;
 const MAX_TURNS_HISTORY = 12;
