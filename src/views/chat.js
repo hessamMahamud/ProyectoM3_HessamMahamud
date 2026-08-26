@@ -78,3 +78,45 @@ function renderStatus() {
 
     return "";
 }
+
+function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+function setState(updates) {
+    Object.assign(state, updates);
+    renderChat();
+}
+
+function setupChat() {
+    const $form = document.querySelector("#chatComposer");
+    const $input = document.querySelector("#chatInput");
+    const $retry = document.querySelector("#retryBtn");
+
+    const debouncedSend = debounce(async () => {
+        if (state.status === "loading") return;
+
+        const text = $input.value.trim();
+        if (!text) return;
+
+        await sendMessage(text);
+        $input.value = "";
+    }, 200);
+
+    $form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        debouncedSend();
+    });
+
+    $retry?.addEventListener("click", () => {
+        if (state.lastUserMessage) {
+            sendMessage(state.lastUserMessage, true);
+        }
+    });
+
+    $input.focus();
+}
+
+
