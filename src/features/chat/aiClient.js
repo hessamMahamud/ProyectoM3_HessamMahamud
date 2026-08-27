@@ -1,4 +1,5 @@
-import { AINZ_SYSTEM_PROMPT } from "./prompts.js";
+import { SYSTEM_PROMPTS_BY_CHARACTER } from "./prompts.js";
+import { DEFAULT_CHARACTER_ID } from "../../data/characters.js";
 import {
     toApiMessages,
     getTrimmedHistory,
@@ -13,7 +14,7 @@ export async function getCharacterReply(uiMessages) {
 
     // Armamos el payload que le vamos a mandar a nuestra Serverless Function
     const payload = {
-        systemPrompt: AINZ_SYSTEM_PROMPT,
+        systemPrompt: SYSTEM_PROMPTS_BY_CHARACTER[DEFAULT_CHARACTER_ID],
         messages: apiMessages,
     };
 

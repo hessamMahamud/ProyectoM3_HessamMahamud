@@ -1,9 +1,12 @@
 import { getCharacterReply } from "./aiClient.js";
 import { debounce, wait } from "../../shared/debounce.js";
 import { getUserMessage } from "./errorMessages.js";
+import { CHARACTERS, DEFAULT_CHARACTER_ID } from "../../data/characters.js";
+
+const activeCharacter = CHARACTERS[DEFAULT_CHARACTER_ID];
 
 const state = {
-    messages: [{ role: "character", text: "Hola, soy tu personaje favorito. Qué quieres saber?" }],
+    messages: [{ role: "character", text: activeCharacter.greeting }],
     status: "idle",
     error: null,
     lastUserMessage: null,
