@@ -9,6 +9,7 @@ export const CHARACTERS = {
         location: { name: "Gran Tumba de Nazarick" },
         greeting: "Soy Ainz Ooal Gown, gobernante de Nazarick. ¿Qué deseas preguntarme?",
     },
+
     albedo: {
         id: "albedo",
         name: "Albedo",
@@ -19,6 +20,7 @@ export const CHARACTERS = {
         location: { name: "Pisos 9 y 10, Nazarick" },
         greeting: "Soy Albedo, Guardiana Suprema de Nazarick. Espero estés aquí por algo digno de Ainz-sama.",
     },
+    
     demiurge: {
         id: "demiurge",
         name: "Demiurge",
