@@ -31,4 +31,4 @@ export const CHARACTERS = {
     },
 };
 
-export const DEFAULT_CHARACTER_ID = "demiurge";
+export const DEFAULT_CHARACTER_ID = "ainz";
