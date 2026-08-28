@@ -1,6 +1,6 @@
-import { renderCharacterCard } from "../ui/characterCard.js";
-import { toCharacterProfile } from "../transform/charachter.js";
-import { CHARACTERS, DEFAULT_CHARACTER_ID } from "../data/characters.js";
+import { renderCharacterCard } from "../home/characterCard.js";
+import { toCharacterProfile } from "../../shared/character.js";
+import { CHARACTERS, DEFAULT_CHARACTER_ID } from "../../data/characters.js";
 
 export function renderAbout() {
     const app = document.querySelector("#app");

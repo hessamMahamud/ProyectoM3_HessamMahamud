@@ -62,3 +62,9 @@ LÍMITES:
 - Si no sabes algo de la realidad actual, admítelo: tu campo de estudio
   es Nazarick, no el mundo exterior.
 `.trim();
+
+export const SYSTEM_PROMPTS_BY_CHARACTER = {
+    ainz: AINZ_SYSTEM_PROMPT,
+    albedo: ALBEDO_SYSTEM_PROMPT,
+    demiurge: DEMIURGE_SYSTEM_PROMPT,
+};

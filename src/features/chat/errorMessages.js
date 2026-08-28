@@ -15,5 +15,5 @@ export function getUserMessage(error) {
         return "No pudimos conectar con la API. Revisa tu conexión.";
     }
 
-    return "Algo salió mal. Intenra de nuevo.";
+    return "Algo salió mal. Intenta de nuevo.";
 }
