@@ -1,4 +1,4 @@
 import { describe, it, expect } from "vitest";
-import { toCharacterProfile } from "./character.js";
+import { toCharacterProfile } from "/";
 
 describe("toCharacterProfile")
