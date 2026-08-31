@@ -1,4 +1,42 @@
 import { describe, it, expect } from "vitest";
-import { toCharacterProfile } from "/";
+import { toCharacterProfile } from "../src/shared/character.js";
 
-describe("toCharacterProfile")
+describe("toCharacterProfile", () => {
+    it("mapea correctamente un personaje con todos los datos presentes", () => {
+        const rawCharacter = {
+            id: "ainz",
+            name: "Ainz Ooal Gown",
+            status: "No-muerto",
+            species: "Esqueleto hechicero",
+            image: "https://ejemplo.com/ainz.png",
+            origin: { name: "Yggrasil" },
+            location: { name: "Nazarick" },
+        };
+
+        const ptofile = toCharacterProfile(rawCharacter);
+
+        expect(ptofile).toEqual({
+            id: "ainz",
+            name: "Ainz Ooal Gown",
+            status: "No-muerto",
+            species: "Esqueleto hechicero",
+            image: "https://ejemplo.com/ainz.png",
+            origin: { name: "Yggrasil" },
+            location: { name: "Nazarick" },
+        });
+    });
+
+    it("usa valores por defecot cuando faltan campos", () => {
+        const rawCharacter = { id: "misterioso" };
+
+        const profile = toCharacterProfile(rawCharacter);
+
+        expect(profile.name).toBe("Desconocido");
+        expect(profile.status).toBe("Unknown");
+        expect(profile.species).toBe("Unknown");
+        expect(profile.image).toBe("");
+        expect(profile.originName).toBe("Unknown");
+        expect(profile.locationName).toBe("Unknown");
+    });
+});
+
