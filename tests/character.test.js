@@ -38,5 +38,18 @@ describe("toCharacterProfile", () => {
         expect(profile.originName).toBe("Unknown");
         expect(profile.locationName).toBe("Unknown");
     });
-});
 
+    it("usa 'Unknown' si origin o location existen pero sin name", () => {
+        const rawCharacter = {
+            id: "raro",
+            name: "Raro",
+            origin: {},
+            location: {},
+        };
+
+        const profile = toCharacterProfile(rawCharacter);
+
+        expect(profile.originName).toBe("Unknown");
+        expect(profile.locationName).toBe("Unknown");
+    });
+});
