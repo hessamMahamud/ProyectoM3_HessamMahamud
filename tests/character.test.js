@@ -13,9 +13,9 @@ describe("toCharacterProfile", () => {
             location: { name: "Nazarick" },
         };
 
-        const ptofile = toCharacterProfile(rawCharacter);
+        const profile = toCharacterProfile(rawCharacter);
 
-        expect(ptofile).toEqual({
+        expect(profile).toEqual({
             id: "ainz",
             name: "Ainz Ooal Gown",
             status: "No-muerto",
