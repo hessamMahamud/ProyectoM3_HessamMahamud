@@ -21,8 +21,8 @@ describe("toCharacterProfile", () => {
             status: "No-muerto",
             species: "Esqueleto hechicero",
             image: "https://ejemplo.com/ainz.png",
-            origin: { name: "Yggrasil" },
-            location: { name: "Nazarick" },
+            originName: "Yggrasil",
+            locationName: "Nazarick",
         });
     });
 
