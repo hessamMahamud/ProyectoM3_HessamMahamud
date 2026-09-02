@@ -3,7 +3,7 @@
 @import "./styles/navigation.css";
 @import "./features/chat/styles/layout.css";
 @import "./features/chat/styles/messages.css";
-@import "./features/chat//styles/composer.css";
+@import "./features/chat/styles/composer.css";
 @import "./styles/views.css";
 @import "./features/chat/styles/states.css";
 @import "./styles/character.css";
