@@ -79,6 +79,7 @@ npm run test:watch
 **Tests disponibles:**
 - `chatPayload.test.js`: verifica la transformación de mensajes y el recorte del historial.
 - `character.test.js`: comprueba el mapeo de datos del personaje.
+- `aiClient.test.js`: mockea `fetch` para probar el manejo de respuestas exitosas y de errores (rate limiting) de la API.
 
 ---
 
@@ -164,7 +165,7 @@ _Más detalles en los archivos [Uso IA](/src/docs/20260902100028.md) y [System P
 ├── .gitignore
 ├── package.json
 ├── README.md
-└── vercel.json                # Configuración de Vercel (opcional)
+└── vercel.json                # Configuración de Vercel
 ```
 
 ---
@@ -183,7 +184,7 @@ _Más detalles en los archivos [Uso IA](/src/docs/20260902100028.md) y [System P
 ## ✨ Extra credits implementados
 
 1. ✅ **Selección de múltiples personajes** – Galería en Home con 3 personajes, cada uno con su propio system prompt.
-2. ⏳ **Persistencia del historial** (pendiente – se mantiene en sesión por ahora).
+2. ✅ **Persistencia del historial** – Guardado en `localStorage` por personaje (una key distinta por cada uno), con indicador visual de "historial guardado" y botón para borrarlo.
 3. ✅ **Funcionalidades adicionales**:
    - Indicador de "escribiendo..." animado.
    - Reintento automático con countdown para errores 429 y 503.
@@ -201,6 +202,3 @@ Estudiante de soyHenry – Full Stack Web Development
 ---
 
 _¡Gracias por visitar este proyecto! Si tienes preguntas, no dudes en contactarme.!_
-```
-
----
