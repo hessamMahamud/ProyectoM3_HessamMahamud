@@ -5,7 +5,7 @@ import { CHARACTERS, DEFAULT_CHARACTER_ID } from "../../data/characters.js";
 export function renderAbout() {
     const app = document.querySelector("#app");
 
-    const lastCharacterId = localStorage("lastCharacterId");
+    const lastCharacterId = localStorage.getItem("lastCharacterId");
     const rawCharacter = CHARACTERS[lastCharacterId] || CHARACTERS[DEFAULT_CHARACTER_ID];
     const profile = toCharacterProfile(rawCharacter);
 
