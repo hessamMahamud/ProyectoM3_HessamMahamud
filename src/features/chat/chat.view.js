@@ -4,20 +4,58 @@ import { getUserMessage } from "./errorMessages.js";
 import { CHARACTERS, DEFAULT_CHARACTER_ID } from "../../data/characters.js";
 
 function getCharacterFromUrl() {
-    const params = new URLSearchParams (window.location.search);
+    const params = new URLSearchParams(window.location.search);
     const id = params.get("character");
     return CHARACTERS[id] || CHARACTERS[DEFAULT_CHARACTER_ID]
 }
 
 const activeCharacter = getCharacterFromUrl();
 const currentCharacterId = activeCharacter.id;
+const CHAT_STORAGE_KEY = `chatHistory:${currentCharacterId}`;
+
+function loadHistory() {
+    try {
+        const raw = localStorage.getItem(CHAT_STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
+
+    } catch {
+        return null;
+    }
+}
+
+function saveHistory() {
+    try {
+        localStorage.getItem(CHAT_STORAGE_KEY, JSON.stringify(messages));
+
+    } catch {
+
+    }
+}
+
+function clearHistory() {
+    localStorage.removeItem(CHAT_STORAGE_KEY);
+    Object.assign(state, {
+        messages: [{ role: "character", text: activeCharacter.greeting }],
+        status: "idle",
+        error: null,
+        lastUserMessage: null,
+        hasSavedHistory: false,
+    });
+
+    renderChat();
+}
+
+const savedMessages = loadHistory();
 
 const state = {
-    messages: [{ role: "character", text: activeCharacter.greeting }],
+    messages: savedMessages ?? [{ role: "character", text: activeCharacter.greeting }],
     status: "idle",
     error: null,
     lastUserMessage: null,
     retryCountdown: null,
+    hasSavedHistory: savedMessages !== null,
 };
 
 export function renderChat() {
@@ -27,6 +65,8 @@ export function renderChat() {
             <header class="chatHeader">
                 <h1 class="chatHeader__title">Chat</h1>
                 <p class="chatHeader__subtitle">Chateando con ${activeCharacter.name}</p>
+                ${state.hasSavedHistory ? `<p class="chatHeader__badge">💾 Tienes un historial guardado</p>` : ""}
+                <button class="chatHeader__clearBtn" id="clearHistoryBtn" type="button">Borrar historial</button>
             </header>
 
             <main class="chatMessages" id="chatMessages" aria-live="polite">
@@ -97,6 +137,10 @@ function escapeHtml(str) {
 
 function setState(updates) {
     Object.assign(state, updates);
+    if (updates.messages) {
+        saveHistory(state.messages);
+        state.hasSavedHistory = true;
+    }
     renderChat();
 }
 
@@ -104,6 +148,7 @@ function setupChat() {
     const $form = document.querySelector("#chatComposer");
     const $input = document.querySelector("#chatInput");
     const $retry = document.querySelector("#retryBtn");
+    document.querySelector("#clearHistoryBtn")?.addEventListener("click", clearHistory);
 
     const debouncedSend = debounce(async () => {
         if (state.status === "loading") return;
@@ -130,7 +175,7 @@ function setupChat() {
 }
 
 async function sendMessage(text, isRetry = false) {
-    const nextMessages = isRetry ? state.messages: [...state.messages, { role: "user", text }];
+    const nextMessages = isRetry ? state.messages : [...state.messages, { role: "user", text }];
 
     setState({
         messages: nextMessages,
@@ -154,7 +199,7 @@ async function sendMessage(text, isRetry = false) {
 
             for (let s = seconds; s > 0; s--) {
                 setState({ status: "loading", retryCountdown: s });
-                await wait (1000);
+                await wait(1000);
             }
 
             try {

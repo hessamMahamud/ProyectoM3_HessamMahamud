@@ -14,7 +14,7 @@ export function renderHome() {
             renderCharacterCard(container, profile);
             const cardHtml = container.innerHTML;
             return `
-                <a href="/chat?character=${profile.id}" data-link>
+                <a class="characterLink" href="/chat?character=${profile.id}" data-link>
                     ${cardHtml}
                 </a>
             `;
