@@ -85,3 +85,10 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+}

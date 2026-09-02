@@ -1,10 +1,10 @@
 @import "./styles/variables.css";
 @import "./styles/reset.css";
 @import "./styles/navigation.css";
-@import "./features/chat/layout.css";
-@import "./features/chat/messages.css";
-@import "./features/chat/composer.css";
+@import "./features/chat/styles/layout.css";
+@import "./features/chat/styles/messages.css";
+@import "./features/chat//styles/composer.css";
 @import "./styles/views.css";
-@import "./features/chat/states.css";
+@import "./features/chat/styles/states.css";
 @import "./styles/character.css";
 @import "./styles/responsive.css";

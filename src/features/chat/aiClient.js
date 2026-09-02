@@ -1,17 +1,15 @@
 import { SYSTEM_PROMPTS_BY_CHARACTER } from "./prompts.js";
-import { DEFAULT_CHARACTER_ID } from "../../data/characters.js";
 import {
     toApiMessages,
     getTrimmedHistory,
 } from "./chatPayload.js";
 
-export async function getCharacterReply(uiMessages) {
+export async function getCharacterReply(uiMessages, characterId) {
     const trimmed = getTrimmedHistory(uiMessages);
-
     const apiMessages = toApiMessages(trimmed);
 
     const payload = {
-        systemPrompt: SYSTEM_PROMPTS_BY_CHARACTER[DEFAULT_CHARACTER_ID],
+        systemPrompt: SYSTEM_PROMPTS_BY_CHARACTER[characterId],
         messages: apiMessages,
     };
 

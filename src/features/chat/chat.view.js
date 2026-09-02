@@ -3,7 +3,14 @@ import { debounce, wait } from "../../shared/debounce.js";
 import { getUserMessage } from "./errorMessages.js";
 import { CHARACTERS, DEFAULT_CHARACTER_ID } from "../../data/characters.js";
 
-const activeCharacter = CHARACTERS[DEFAULT_CHARACTER_ID];
+function getCharacterFromUrl() {
+    const params = new URLSearchParams (window.location.search);
+    const id = params.get("character");
+    return CHARACTERS[id] || CHARACTERS[DEFAULT_CHARACTER_ID]
+}
+
+const activeCharacter = getCharacterFromUrl();
+const currentCharacterId = activeCharacter.id;
 
 const state = {
     messages: [{ role: "character", text: activeCharacter.greeting }],
@@ -19,7 +26,7 @@ export function renderChat() {
         <div class="chatApp">
             <header class="chatHeader">
                 <h1 class="chatHeader__title">Chat</h1>
-                <p class="chatHeader__subtitle">Con tu personaje favorito</p>
+                <p class="chatHeader__subtitle">Chateando con ${activeCharacter.name}</p>
             </header>
 
             <main class="chatMessages" id="chatMessages" aria-live="polite">
@@ -133,7 +140,7 @@ async function sendMessage(text, isRetry = false) {
     });
 
     try {
-        const reply = await getCharacterReply(nextMessages);
+        const reply = await getCharacterReply(nextMessages, currentCharacterId);
         setState({
             messages: [...nextMessages, { role: "character", text: reply }],
             status: "idle",
