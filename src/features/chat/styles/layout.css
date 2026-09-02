@@ -38,3 +38,24 @@
     border-top: 1px solid var(--color-border);
     background: var(--color-bg-app);
 }
+
+.chatHeader__badge {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-xs);
+}
+
+.chatHeader__clearBtn {
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    background: transparent;
+    border: 1px solid var(--color-border-input);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    color: var(--color-text-secondary);
+}
+
+.chatHeader__clearBtn:hover {
+    background: var(--color-bg-hover);
+}

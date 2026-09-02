@@ -16,6 +16,10 @@
     .message {
         max-width: 75%;
     }
+
+    .characters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* Desktop: 1024px en adelante */
@@ -57,5 +61,9 @@
         width: var(--card-image-width);
         aspect-ratio: auto;
         flex-shrink: 0;
+    }
+
+    .characters-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

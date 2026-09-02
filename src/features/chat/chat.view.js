@@ -3,23 +3,103 @@ import { debounce, wait } from "../../shared/debounce.js";
 import { getUserMessage } from "./errorMessages.js";
 import { CHARACTERS, DEFAULT_CHARACTER_ID } from "../../data/characters.js";
 
-const activeCharacter = CHARACTERS[DEFAULT_CHARACTER_ID];
+//Variables globales
+let currentCharacterId = null;
+let activeCharacter = null;
+let CHAT_STORAGE_KEY = null;
+let state = null;
 
-const state = {
-    messages: [{ role: "character", text: activeCharacter.greeting }],
-    status: "idle",
-    error: null,
-    lastUserMessage: null,
-    retryCountdown: null,
-};
+/* const activeCharacter = getCharacterFromUrl();
+const currentCharacterId = activeCharacter.id;
+const CHAT_STORAGE_KEY = `chatHistory:${currentCharacterId}`; */
 
+
+
+//Funciones de utilidad
+function getCharacterFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("character");
+    return CHARACTERS[id] || CHARACTERS[DEFAULT_CHARACTER_ID]
+}
+
+function loadHistory() {
+    try {
+        const raw = localStorage.getItem(CHAT_STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
+
+    } catch {
+        return null;
+    }
+}
+
+function saveHistory(messages) {
+    try {
+        localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(messages));
+
+    } catch {
+
+    }
+}
+
+function clearHistory() {
+    localStorage.removeItem(CHAT_STORAGE_KEY);
+    Object.assign(state, {
+        messages: [{ role: "character", text: activeCharacter.greeting }],
+        status: "idle",
+        error: null,
+        lastUserMessage: null,
+        hasSavedHistory: false,
+    });
+
+    renderChat();
+}
+
+//Inicialización chat
+function initChat(characterId) {
+    if (currentCharacterId === characterId) return;
+
+    //Actualizar personajes
+    activeCharacter = CHARACTERS[characterId] || CHARACTERS[DEFAULT_CHARACTER_ID];
+    currentCharacterId = activeCharacter.id;
+    CHAT_STORAGE_KEY = `chatHistory:${currentCharacterId}`;
+
+    //cargar historial
+    const savedMessages = loadHistory(CHAT_STORAGE_KEY);
+    state = {
+        messages: savedMessages ?? [{ role: "character", text: activeCharacter.greeting }],
+        status: "idle",
+        error: null,
+        lastUserMessage: null,
+        retryCountdown: null,
+        hasSavedHistory: savedMessages !== null,
+    };
+}
+
+//Renderizar
 export function renderChat() {
+    //Obtener personaje
+    const characterFromUrl = getCharacterFromUrl();
+    const characterId = characterFromUrl.id;
+
+    //Inicializar chat por personaje
+    initChat(characterId);
+
+    //Renderiza DOM estado actual
     const app = document.querySelector("#app");
+    if (!app) {
+        console.error("🚫 #app no encontrada");
+        return;
+    }
+
     app.innerHTML = `
         <div class="chatApp">
             <header class="chatHeader">
                 <h1 class="chatHeader__title">Chat</h1>
-                <p class="chatHeader__subtitle">Con tu personaje favorito</p>
+                <p class="chatHeader__subtitle">Chateando con ${activeCharacter.name}</p>
+                ${state.hasSavedHistory ? `<p class="chatHeader__badge">💾 Tienes un historial guardado</p>` : ""}
+                <button class="chatHeader__clearBtn" id="clearHistoryBtn" type="button">Borrar historial</button>
             </header>
 
             <main class="chatMessages" id="chatMessages" aria-live="polite">
@@ -90,6 +170,10 @@ function escapeHtml(str) {
 
 function setState(updates) {
     Object.assign(state, updates);
+    if (updates.messages) {
+        saveHistory(state.messages);
+        state.hasSavedHistory = true;
+    }
     renderChat();
 }
 
@@ -97,6 +181,7 @@ function setupChat() {
     const $form = document.querySelector("#chatComposer");
     const $input = document.querySelector("#chatInput");
     const $retry = document.querySelector("#retryBtn");
+    document.querySelector("#clearHistoryBtn")?.addEventListener("click", clearHistory);
 
     const debouncedSend = debounce(async () => {
         if (state.status === "loading") return;
@@ -123,7 +208,7 @@ function setupChat() {
 }
 
 async function sendMessage(text, isRetry = false) {
-    const nextMessages = isRetry ? state.messages: [...state.messages, { role: "user", text }];
+    const nextMessages = isRetry ? state.messages : [...state.messages, { role: "user", text }];
 
     setState({
         messages: nextMessages,
@@ -133,7 +218,7 @@ async function sendMessage(text, isRetry = false) {
     });
 
     try {
-        const reply = await getCharacterReply(nextMessages);
+        const reply = await getCharacterReply(nextMessages, currentCharacterId);
         setState({
             messages: [...nextMessages, { role: "character", text: reply }],
             status: "idle",
@@ -147,7 +232,7 @@ async function sendMessage(text, isRetry = false) {
 
             for (let s = seconds; s > 0; s--) {
                 setState({ status: "loading", retryCountdown: s });
-                await wait (1000);
+                await wait(1000);
             }
 
             try {

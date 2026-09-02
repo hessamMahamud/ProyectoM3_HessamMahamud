@@ -27,11 +27,19 @@ export default async function handler(req, res) {
         const usage = result.response.usageMetadata;
 
         return res.status(200).json({ text, usage });
+
     } catch (error) {
         console.error("Error en Gemini:", error);
         if (error.status === 429) {
             return res.status(429).json({
                 error: "Límite de tasa excedido",
+                retryAfterSeconds: 5,
+            });
+        }
+
+        if (error.status === 503) {
+            return res.status(503).json({
+                error: "El servicio de IA está sobrecargado. Intenta de nuevo en unos segundos.",
                 retryAfterSeconds: 5,
             });
         }

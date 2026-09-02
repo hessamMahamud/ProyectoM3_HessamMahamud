@@ -85,3 +85,25 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    justify-content: center;
+}
+
+.characterLink {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    justify-content: center;
+}
+
+.characterLink .characterCard {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    justify-content: center;
+}
