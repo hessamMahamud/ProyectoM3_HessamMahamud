@@ -112,7 +112,7 @@ _(Inserta aquí tus capturas)_
 
 | Home – Galería de personajes | Chat con Ainz | About |
 | --- | --- | --- |
-| ![Home](./screenshots/home.png) | ![Chat](./screenshots/chat.png) | ![About](./screenshots/about.png) |
+| ![Home](./src/assets/screenshots/home.png) | ![Chat](./src/assets/screenshots/chat.png) | ![About](./src/assets/screenshots/about.png) |
 
 ---
 
