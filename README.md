@@ -30,7 +30,7 @@ El usuario puede elegir con cuál de los tres quiere chatear desde la página de
 
 1. **Clonar el repositorio**
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/hessamMahamud/ProyectoM3_HessamMahamud.git
    cd ProyectoM3_HessamMahamud
    ```
 
@@ -117,7 +117,7 @@ _(Inserta aquí tus capturas)_
 
 ## 🔗 Link a la aplicación desplegada
 
-[https://tu-proyecto.vercel.app](https://tu-proyecto.vercel.app)
+[Chat desplegado en Vercel](https://proyecto-m3-hessam-mahamud.vercel.app/)
 
 ---
 
