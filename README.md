@@ -196,7 +196,7 @@ _Más detalles en los archivos [Uso IA](/src/docs/20260902100028.md) y [System P
 
 **Hessam Mahamud**
 Estudiante de soyHenry – Full Stack Web Development
-[GitHub](https://github.com/tu-usuario) | [LinkedIn](https://linkedin.com/in/tu-perfil)
+[GitHub](https://github.com/hessamMahamud) | [LinkedIn](https://linkedin.com/in/tu-perfil)
 
 ---
 
@@ -204,11 +204,3 @@ _¡Gracias por visitar este proyecto! Si tienes preguntas, no dudes en contactar
 ```
 
 ---
-
-**Instrucciones finales:**
-1. Copia todo el bloque de arriba y pégalo en un archivo `README.md` en la raíz de tu proyecto.
-2. Sustituye los placeholders (url del repositorio, enlace a Vercel, capturas, etc.) con tus datos reales.
-3. Si implementaste localStorage, añade una línea en la sección de Extra Credits.
-4. Sube el archivo a GitHub y verifica que se vea bien en el repositorio.
-
-¿Necesitas algún ajuste adicional o quieres que modifique alguna sección?
