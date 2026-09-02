@@ -3,15 +3,24 @@ import { debounce, wait } from "../../shared/debounce.js";
 import { getUserMessage } from "./errorMessages.js";
 import { CHARACTERS, DEFAULT_CHARACTER_ID } from "../../data/characters.js";
 
+//Variables globales
+let currentCharacterId = null;
+let activeCharacter = null;
+let CHAT_STORAGE_KEY = null;
+let state = null;
+
+/* const activeCharacter = getCharacterFromUrl();
+const currentCharacterId = activeCharacter.id;
+const CHAT_STORAGE_KEY = `chatHistory:${currentCharacterId}`; */
+
+
+
+//Funciones de utilidad
 function getCharacterFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("character");
     return CHARACTERS[id] || CHARACTERS[DEFAULT_CHARACTER_ID]
 }
-
-const activeCharacter = getCharacterFromUrl();
-const currentCharacterId = activeCharacter.id;
-const CHAT_STORAGE_KEY = `chatHistory:${currentCharacterId}`;
 
 function loadHistory() {
     try {
@@ -25,9 +34,9 @@ function loadHistory() {
     }
 }
 
-function saveHistory() {
+function saveHistory(messages) {
     try {
-        localStorage.getItem(CHAT_STORAGE_KEY, JSON.stringify(messages));
+        localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(messages));
 
     } catch {
 
@@ -47,19 +56,43 @@ function clearHistory() {
     renderChat();
 }
 
-const savedMessages = loadHistory();
+//Inicialización chat
+function initChat(characterId) {
+    if (currentCharacterId === characterId) return;
 
-const state = {
-    messages: savedMessages ?? [{ role: "character", text: activeCharacter.greeting }],
-    status: "idle",
-    error: null,
-    lastUserMessage: null,
-    retryCountdown: null,
-    hasSavedHistory: savedMessages !== null,
-};
+    //Actualizar personajes
+    activeCharacter = CHARACTERS[characterId] || CHARACTERS[DEFAULT_CHARACTER_ID];
+    currentCharacterId = activeCharacter.id;
+    CHAT_STORAGE_KEY = `chatHistory:${currentCharacterId}`;
 
+    //cargar historial
+    const savedMessages = loadHistory(CHAT_STORAGE_KEY);
+    state = {
+        messages: savedMessages ?? [{ role: "character", text: activeCharacter.greeting }],
+        status: "idle",
+        error: null,
+        lastUserMessage: null,
+        retryCountdown: null,
+        hasSavedHistory: savedMessages !== null,
+    };
+}
+
+//Renderizar
 export function renderChat() {
+    //Obtener personaje
+    const characterFromUrl = getCharacterFromUrl();
+    const characterId = characterFromUrl.id;
+
+    //Inicializar chat por personaje
+    initChat(characterId);
+
+    //Renderiza DOM estado actual
     const app = document.querySelector("#app");
+    if (!app) {
+        console.error("🚫 #app no encontrada");
+        return;
+    }
+
     app.innerHTML = `
         <div class="chatApp">
             <header class="chatHeader">
