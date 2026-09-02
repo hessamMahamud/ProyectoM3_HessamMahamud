@@ -64,6 +64,7 @@ function initChat(characterId) {
     activeCharacter = CHARACTERS[characterId] || CHARACTERS[DEFAULT_CHARACTER_ID];
     currentCharacterId = activeCharacter.id;
     CHAT_STORAGE_KEY = `chatHistory:${currentCharacterId}`;
+    localStorage.setItem("lastCharacterId", currentCharacterId);
 
     //cargar historial
     const savedMessages = loadHistory(CHAT_STORAGE_KEY);

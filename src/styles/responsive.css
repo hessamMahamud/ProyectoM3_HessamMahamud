@@ -51,13 +51,13 @@
         max-width: 60%;
     }
 
-    /* Tarjeta horizontal (ya que está en character.css, pero la media query es específica) */
-    .characterCard {
+    /* Tarjeta horizontal */
+    .view--about .characterCard {
         flex-direction: row;
         max-width: var(--card-max-width);
     }
 
-    .characterCard__image {
+    .view--about .characterCard__image {
         width: var(--card-image-width);
         aspect-ratio: auto;
         flex-shrink: 0;
