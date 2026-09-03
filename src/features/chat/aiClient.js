@@ -29,8 +29,8 @@ export async function getCharacterReply(uiMessages, characterId) {
         throw error;
     }
 
-    const data = await response.json();
-    const text = data.text || "";
+    /* const data = await response.json();
+    const text = data.text || ""; */
 
     /* if (data.usage) {
         console.log(`[Tokens] input: ${data.usage.promptTokenCount}, output: ${data.usage.candidatesTokenCount}`);
