@@ -108,8 +108,6 @@ npm run test:watch
 
 ## 📸 Capturas de pantalla
 
-_(Inserta aquí tus capturas)_
-
 | Home – Galería de personajes | Chat con Ainz | About |
 | --- | --- | --- |
 | ![Home](./src/assets/screenshots/home.png) | ![Chat](./src/assets/screenshots/chat.png) | ![About](./src/assets/screenshots/about.png) |
