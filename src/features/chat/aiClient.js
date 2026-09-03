@@ -32,9 +32,9 @@ export async function getCharacterReply(uiMessages, characterId) {
     const data = await response.json();
     const text = data.text || "";
 
-    if (data.usage) {
+    /* if (data.usage) {
         console.log(`[Tokens] input: ${data.usage.promptTokenCount}, output: ${data.usage.candidatesTokenCount}`);
-    }
+    } */
 
     return text;
 }
